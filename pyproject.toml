@@ -1,0 +1,11 @@
+[tool.poetry]
+name = "document-similarity"
+version = "0.1.0"
+description = ""
+authors = ["sesmi123 <48611310+sesmi123@users.noreply.github.com>"]
+
+[tool.poetry.dependencies]
+python = "*"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
