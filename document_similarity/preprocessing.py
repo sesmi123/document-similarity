@@ -1,25 +1,27 @@
-import nltk
-import re
+import re # regular expressions
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
-
-# nltk.download('omw-1.4')
-# nltk.download('wordnet')
-# nltk.download('stopwords')
+from nltk.tokenize import word_tokenize
 
 # Initialize the WordNet lemmatizer
-stop_words = set(stopwords.words('english'))
 lemmatizer = WordNetLemmatizer()
 
+stop_words = set(stopwords.words('english'))
+
 def preprocess(doc):
+
     # Convert to lower case
     doc = doc.lower()
+
     # Remove punctuation
     doc = re.sub(r'\W', ' ', doc)
+
     # Remove extra spaces
     doc = re.sub(r'\s+', ' ', doc).strip()
-    # Lemmatization
-    words = doc.split()
+
+    # Lemmatization and remove stop words
+    words = word_tokenize(doc)
     words = [lemmatizer.lemmatize(word) for word in words if word not in stop_words]
+    
     return ' '.join(words)
 

@@ -10,7 +10,7 @@ docA_clean = preprocess(docA)
 docB_clean = preprocess(docB)
 
 
-# Vectorization
+# Vectorization - term frequency-inverse document frequency
 vectorizer = TfidfVectorizer()
 tfidf_vectors = vectorizer.fit_transform([docA_clean, docB_clean])
 
