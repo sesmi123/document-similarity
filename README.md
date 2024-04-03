@@ -9,8 +9,11 @@ Inspired by: [Evaluating Methods for Calculating Document Similarity](https://ww
 ```sh
 pip install -r requirements.txt
 py nltk_download.py
-
 ```
+
+## Example Usage
+
+![ExampleUsage](./screenshots/example-usage.PNG)
 
 ## Jaccard's similarity
 

@@ -6,6 +6,14 @@ from preprocessing import preprocess
 vectorizer = TfidfVectorizer()
 
 def cosine_similarity_with_tf_idf(docA, docB):
+    """
+    Usage:
+    
+    docA = "The sky is blue."
+    docB = "The sun is bright."
+
+    cosine_similarity_with_tf_idf(docA, docB)
+    """
     
     docA_clean = preprocess(docA)
     docB_clean = preprocess(docB)
@@ -14,13 +22,6 @@ def cosine_similarity_with_tf_idf(docA, docB):
 
     # Calculate Cosine Similarity
     cosine_sim = cosine_similarity(tfidf_vectors[0:1], tfidf_vectors)
-    print(f"Cosine Similarity: {cosine_sim}")
+    
+    return cosine_sim[0][1]
 
-    return cosine_sim
-
-
-# Sample documents
-docA = "The sky is blue."
-docB = "The sun is bright."
-
-cosine_similarity_with_tf_idf(docA, docB)
