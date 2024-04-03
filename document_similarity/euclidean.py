@@ -1,5 +1,4 @@
 from scipy.spatial import distance
-from preprocessing import preprocess
 
 # Vectorization - Bag of Words
 from sklearn.feature_extraction.text import CountVectorizer
@@ -24,11 +23,8 @@ def euclidean_similarity(docA, docB):
     This is because longer documents may have higher word counts overall, 
     affecting the magnitude of their vector representations.
     """
-    
-    docA_clean = preprocess(docA)
-    docB_clean = preprocess(docB)
 
-    vectors = vectorizer.fit_transform([docA_clean, docB_clean]).toarray()
+    vectors = vectorizer.fit_transform([docA, docB]).toarray()
 
     euclidean_dist = distance.euclidean(vectors[0], vectors[1])
 

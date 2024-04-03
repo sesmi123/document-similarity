@@ -1,31 +1,39 @@
 import os
 import glob
 
+from preprocessing import preprocess
 from jaccard import jaccard_similarity
 from euclidean import euclidean_similarity
 from cosine_with_tf_idf import cosine_similarity_with_tf_idf
+
+def preprocess_and_store_documents():
+    document_directory = "document_database"
+    documents = list_txt_files(document_directory)
+    preprocessed_documents = {}
+
+    for file_path in documents:
+        with open(file_path, "r") as f:
+            preprocessed_documents[os.path.basename(file_path)] = preprocess(f.read())
+
+    return preprocessed_documents
 
 def list_txt_files(directory):
     return glob.glob(os.path.join(directory, '*.txt'))
 
 def get_most_matching_document(choice, text):
     matching_document = (None, 0)
-    document_directory = "document_database"
-    documents = list_txt_files(document_directory)
+    text = preprocess(text)
 
-    for file_path in documents:
-        with open(file_path, "r") as f:
-            doc_content = f.read()
-            
-            if choice == '1':
-                result = jaccard_similarity(text, doc_content)
-            elif choice == '2':
-                result = euclidean_similarity(text, doc_content)
-            elif choice == '3':
-                result = cosine_similarity_with_tf_idf(text, doc_content)
-            
-            if matching_document[1] < result:
-                matching_document = (os.path.basename(file_path), result)
+    for doc, content in doc_store.items():
+        if choice == '1':
+            result = jaccard_similarity(text, content)
+        elif choice == '2':
+            result = euclidean_similarity(text, content)
+        elif choice == '3':
+            result = cosine_similarity_with_tf_idf(text, content)
+        
+        if matching_document[1] < result:
+            matching_document = (doc, result)
 
     return matching_document
 
@@ -58,4 +66,6 @@ def main():
             continue
 
 if __name__ == "__main__":
+    print("Preparing data store...")
+    doc_store = preprocess_and_store_documents()
     main()

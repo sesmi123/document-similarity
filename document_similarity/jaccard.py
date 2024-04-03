@@ -1,5 +1,3 @@
-from preprocessing import preprocess
-
 
 def jaccard_similarity(doc1, doc2):
     """
@@ -13,8 +11,8 @@ def jaccard_similarity(doc1, doc2):
     even though the two documents are semantically different.
     """
 
-    words_doc1 = set(preprocess(doc1).split())
-    words_doc2 = set(preprocess(doc2).split())
+    words_doc1 = set(doc1.split())
+    words_doc2 = set(doc2.split())
     
     # Find the intersection and union of the two sets
     intersection = words_doc1.intersection(words_doc2)
