@@ -1,5 +1,7 @@
 import os
 import glob
+from gensim.models import Doc2Vec
+from nltk.tokenize import word_tokenize
 
 from preprocessing import preprocess
 from jaccard import JaccardSimilarity
@@ -19,6 +21,13 @@ def preprocess_and_store_documents():
 
 def list_txt_files(directory):
     return glob.glob(os.path.join(directory, '*.txt'))
+
+def infer_and_find_similar_using_doc2vec(model, new_document_text):
+    # Tokenize the new document in the same way as your training documents
+    new_document_words = word_tokenize(new_document_text.lower())
+    inferred_vector = model.infer_vector(new_document_words)
+    similar_documents = model.dv.most_similar([inferred_vector], topn=1)
+    return similar_documents[0]
 
 def get_most_matching_document(strategy, text):
     matching_document = (None, 0)
@@ -48,7 +57,8 @@ def main():
         print("1. Jaccard's similarity")
         print("2. Euclidean similarity")
         print("3. Cosine similarity")
-        choice = input("Enter your choice (1/2/3) or 'exit': ").strip().lower()
+        print("4. Doc2Vec model")
+        choice = input("Enter your choice (1/2/3/4) or 'exit': ").strip().lower()
 
         if choice == 'exit':
             print("Exiting the application.")
@@ -63,11 +73,20 @@ def main():
                 print(f"Result: Found \"{result[0]}\" document with a match of {result[1]}")
                 with open(f"document_database/{result[0]}", "r") as f:
                     print(f.read())
+        elif choice == '4':
+            text = get_user_input_text()
+            result = infer_and_find_similar_using_doc2vec(model, text)
+            if result is None:
+                print("No matching documents found for the given query!!")
+            else:
+                print(f"Result: Found \"{result[0]}\" document with a match of {result[1]}")
+                with open(f"document_database_ml_training/{result[0]}", "r") as f:
+                    print(f.read())
         else:
             print("Invalid choice. Please choose a valid option.")
             continue
 
 if __name__ == "__main__":
-    print("Preparing data store...")
     doc_store = preprocess_and_store_documents()
+    model = Doc2Vec.load("doc2vec_model")
     main()

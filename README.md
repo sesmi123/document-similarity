@@ -42,3 +42,10 @@ The TF-IDF value increases proportionally to the number of times a word appears 
 The Bag of Words (BoW) model is a simplifying representation used in natural language processing and information retrieval. In this model, a text is represented as the bag (multiset) of its words, disregarding grammar and even word order but keeping multiplicity.
 
 We call vectorization the general process of turning a collection of text documents into numerical feature vectors. This specific strategy (tokenization, counting and normalization) is called the Bag of Words or "Bag of n-grams" representation. Documents are described by word occurrences while completely ignoring the relative position information of the words in the document.
+
+
+## Doc2Vec
+
+Dataset used is a subset of [10dataset-text-document-classification](https://www.kaggle.com/datasets/jensenbaxter/10dataset-text-document-classification)
+
+The accuracy of a trained model is very poor right now. Need to improve upon it.
