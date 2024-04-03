@@ -48,4 +48,4 @@ We call vectorization the general process of turning a collection of text docume
 
 Dataset used is a subset of [10dataset-text-document-classification](https://www.kaggle.com/datasets/jensenbaxter/10dataset-text-document-classification)
 
-The accuracy of a trained model is very poor right now. Need to improve upon it.
+The accuracy of the trained model is very poor right now. Need to improve upon it.
