@@ -1,23 +1,26 @@
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
+from abstract_similarity_startegy import SimilarityStrategy
 
-# Vectorization - term frequency-inverse document frequency
-vectorizer = TfidfVectorizer()
+class CosineSimilarity(SimilarityStrategy):
 
-def cosine_similarity_with_tf_idf(docA, docB):
-    """
-    Usage:
-    
-    docA = "The sky is blue."
-    docB = "The sun is bright."
+    # Vectorization - term frequency-inverse document frequency
+    vectorizer = TfidfVectorizer()
 
-    cosine_similarity_with_tf_idf(docA, docB)
-    """
+    def calculate_similarity(self, docA, docB):
+        """
+        Usage:
+        
+        docA = "The sky is blue."
+        docB = "The sun is bright."
 
-    tfidf_vectors = vectorizer.fit_transform([docA, docB])
+        calculate_similarity(docA, docB)
+        """
 
-    # Calculate Cosine Similarity
-    cosine_sim = cosine_similarity(tfidf_vectors[0:1], tfidf_vectors)
-    
-    return cosine_sim[0][1]
+        tfidf_vectors = self.vectorizer.fit_transform([docA, docB])
+
+        # Calculate Cosine Similarity
+        cosine_sim = cosine_similarity(tfidf_vectors[0:1], tfidf_vectors)
+        
+        return cosine_sim[0][1]
 

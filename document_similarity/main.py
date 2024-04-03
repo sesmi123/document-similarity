@@ -2,9 +2,9 @@ import os
 import glob
 
 from preprocessing import preprocess
-from jaccard import jaccard_similarity
-from euclidean import euclidean_similarity
-from cosine_with_tf_idf import cosine_similarity_with_tf_idf
+from jaccard import JaccardSimilarity
+from euclidean import EuclideanSimilarity
+from cosine_with_tf_idf import CosineSimilarity
 
 def preprocess_and_store_documents():
     document_directory = "document_database"
@@ -20,17 +20,12 @@ def preprocess_and_store_documents():
 def list_txt_files(directory):
     return glob.glob(os.path.join(directory, '*.txt'))
 
-def get_most_matching_document(choice, text):
+def get_most_matching_document(strategy, text):
     matching_document = (None, 0)
     text = preprocess(text)
 
     for doc, content in doc_store.items():
-        if choice == '1':
-            result = jaccard_similarity(text, content)
-        elif choice == '2':
-            result = euclidean_similarity(text, content)
-        elif choice == '3':
-            result = cosine_similarity_with_tf_idf(text, content)
+        result = strategy.calculate_similarity(text, content)
         
         if matching_document[1] < result:
             matching_document = (doc, result)
@@ -42,6 +37,12 @@ def get_user_input_text():
     return input("> ")
 
 def main():
+    strategies = {
+        '1': JaccardSimilarity(),
+        '2': EuclideanSimilarity(),
+        '3': CosineSimilarity(),
+    }
+
     while True:
         print("\nChoose a similarity measure or type 'exit' to quit:")
         print("1. Jaccard's similarity")
@@ -52,9 +53,10 @@ def main():
         if choice == 'exit':
             print("Exiting the application.")
             break
-        elif choice in ['1', '2', '3']:
+        elif choice in strategies:
             text = get_user_input_text()
-            result = get_most_matching_document(choice, text)
+            strategy = strategies[choice]
+            result = get_most_matching_document(strategy, text)
             if result[0] is None:
                 print("No matching documents found for the given query!!")
             else:
