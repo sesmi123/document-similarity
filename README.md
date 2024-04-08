@@ -15,6 +15,15 @@ py nltk_download.py
 
 ![ExampleUsage](./screenshots/example-usage.PNG)
 
+## Preprocessing
+
+* Tokenization
+* Lower casing
+* Remove punctuations
+* Remove stop words
+* Stemming
+* Lemmatizing (better than stemming)
+
 ## Jaccard's similarity
 
 Jaccard's similarity measures the similarity between two sets. It is defined as the size of the intersection divided by the size of the union of the sample sets.
@@ -48,4 +57,25 @@ We call vectorization the general process of turning a collection of text docume
 
 Dataset used is a subset of [10dataset-text-document-classification](https://www.kaggle.com/datasets/jensenbaxter/10dataset-text-document-classification)
 
-The accuracy of the trained model is very poor right now. Need to improve upon it.
+The accuracy of the trained model is subpar right now. Need to improve it.
+
+
+## Sentence similarity features and applications
+
+### Fuzzy string matching
+
+[Reference](https://chairnerd.seatgeek.com/fuzzywuzzy-fuzzy-string-matching-in-python/)
+
+Features that could used to find fuzzy similarity between sentences include:
+
+* string similarity (edit distance)
+* partial string similarity
+* token sort
+* token set
+
+Some of the applications of finding similar sentences are:
+
+* Question Answering Systems: solving Quora question pair similarity problem, 
+* Information Retrieval: creating a website for pulling event tickets for a game or show from all over the internet and listing them in a single page, 
+* Legal Document Analysis: finding and comparing similar cases or regulations within legal documents to aid in legal research or case preparation, 
+* Medical Record Analysis: comparing patient reports and medical records to identify similar cases/treatments/outcomes for better diagnosis and treatment planning etc.
