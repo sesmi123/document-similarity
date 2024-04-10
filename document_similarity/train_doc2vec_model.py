@@ -21,6 +21,13 @@ def train_doc2vec(documents):
     model.save("doc2vec_model")
     return model
 
+def infer_and_find_similar_using_doc2vec(model, new_document_text):
+    # Tokenize the new document in the same way as your training documents
+    new_document_words = word_tokenize(new_document_text.lower())
+    inferred_vector = model.infer_vector(new_document_words)
+    similar_documents = model.dv.most_similar([inferred_vector], topn=1)
+    return similar_documents[0]
+
 if __name__ == "__main__":
     documents = read_and_preprocess("document_database_ml_training")
     doc2vec_model = train_doc2vec(documents)

@@ -3,25 +3,28 @@ from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
-# Initialize the WordNet lemmatizer
-lemmatizer = WordNetLemmatizer()
+class DocumentPreProcessor:
 
-stop_words = set(stopwords.words('english'))
+    def __init__(self) -> None:
+        # Initialize the WordNet lemmatizer
+        self.lemmatizer = WordNetLemmatizer()
 
-def preprocess(doc):
+        self.stop_words = set(stopwords.words('english'))
 
-    # Convert to lower case
-    doc = doc.lower()
+    def preprocess(self, doc):
 
-    # Remove punctuation
-    doc = re.sub(r'\W', ' ', doc)
+        # Convert to lower case
+        doc = doc.lower()
 
-    # Remove extra spaces
-    doc = re.sub(r'\s+', ' ', doc).strip()
+        # Remove punctuation
+        doc = re.sub(r'\W', ' ', doc)
 
-    # Lemmatization and remove stop words
-    words = word_tokenize(doc)
-    words = [lemmatizer.lemmatize(word) for word in words if word not in stop_words]
-    
-    return ' '.join(words)
+        # Remove extra spaces
+        doc = re.sub(r'\s+', ' ', doc).strip()
+
+        # Lemmatization and remove stop words
+        words = word_tokenize(doc)
+        words = [self.lemmatizer.lemmatize(word) for word in words if word not in self.stop_words]
+        
+        return ' '.join(words)
 
