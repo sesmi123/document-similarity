@@ -85,14 +85,21 @@ Doc2Vec has two primary architectures for training:
 
 [Reference](https://github.com/piskvorky/gensim/blob/develop/docs/notebooks/doc2vec-wikipedia.ipynb)
 
-Dataset used is a subset of [10dataset-text-document-classification](https://www.kaggle.com/datasets/jensenbaxter/10dataset-text-document-classification)
-
-The accuracy of the trained model is subpar right now. Need to improve it.
-
 
 ### Limitations
 
 **Training Complexity:** Training a Doc2Vec model requires a significant amount of data and computational resources.
+
+### Results
+
+Dataset used for training is a subset of [10-dataset-text-document-classification](https://www.kaggle.com/datasets/jensenbaxter/10dataset-text-document-classification)
+
+The accuracy of the trained model is subpar. Require high computational power and large dataset to train the model.
+
+OR
+
+Use a pretrained doc2vec model if available. For example, from [Pretrained Wikipedia Doc2Vec Models](https://github.com/kongyq/Pretrained_Wikipedia_Doc2Vec_Models?tab=readme-ov-file)
+
 
 
 ## Sentence similarity features and applications
@@ -101,7 +108,7 @@ The accuracy of the trained model is subpar right now. Need to improve it.
 
 [Reference](https://chairnerd.seatgeek.com/fuzzywuzzy-fuzzy-string-matching-in-python/)
 
-Features that could used to find fuzzy similarity between sentences include:
+Features that could be used to find fuzzy similarity between sentences:
 
 * string similarity (edit distance)
 * partial string similarity
